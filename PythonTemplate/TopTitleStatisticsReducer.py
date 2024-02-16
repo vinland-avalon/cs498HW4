@@ -7,7 +7,7 @@ sum_counts = 0
 count = 0
 min_count = sys.maxsize
 max_count = 0
-squared_sum = 0
+differences_squared_sum = 0
 
 # Input comes from STDIN
 for line in sys.stdin:
@@ -17,18 +17,26 @@ for line in sys.stdin:
     # Convert count to int
     current_count = int(current_count)
 
-    # Update statistics
+    # Update statistics for sum, count, min, and max
     sum_counts += current_count
-    squared_sum += current_count ** 2
     count += 1
     min_count = min(min_count, current_count)
     max_count = max(max_count, current_count)
 
-# Calculate mean
+# Calculate mean after processing all items
 mean = sum_counts // count
 
-# Calculate variance using the formula: Var(X) = E[(X - μ)^2]
-variance = (squared_sum // count) - (mean ** 2)
+# Reset the input stream to calculate variance
+sys.stdin.seek(0)
+
+# Calculate the sum of squared differences from the mean
+for line in sys.stdin:
+    current_count, _ = line.strip().split('\t', 1)
+    current_count = int(current_count)
+    differences_squared_sum += (current_count - mean) ** 2
+
+# Calculate variance
+variance = differences_squared_sum // count
 
 # Print the final output
 print(f'Mean\t{mean}')
