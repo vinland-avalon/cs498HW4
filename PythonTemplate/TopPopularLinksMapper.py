@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
+
 import sys
 
-
-# TODO
-
-
-
+# Input comes from STDIN (standard input)
 for line in sys.stdin:
-
-       #TODO
-
-
-#TODO
-# print('%s\t%s' % (  ,  )) pass this output to reducer
+    # The mapper simply prints out all lines it receives.
+    # This passes them to the reducer.
+    print(line.strip())

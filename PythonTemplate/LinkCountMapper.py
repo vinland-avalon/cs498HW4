@@ -3,6 +3,10 @@ import sys
 
 
 for line in sys.stdin:
-  #TODO
+    # Split the line into page ID and linked pages
+    _, links = line.strip().split(':')
+    linked_page_ids = links.split()
 
-  # print('%s\t%s' % (  ,  )) pass this output to reducer
+    # Emit the linked page IDs with a marker to indicate they are linked to
+    for linked_page_id in linked_page_ids:
+            print(f'{linked_page_id}\t{"1"}')
