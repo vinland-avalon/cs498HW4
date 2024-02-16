@@ -21,7 +21,7 @@ with open(delimitersPath, 'r') as f:
 # Process each line from standard input
 for line in sys.stdin:
     # Tokenize the line using the delimiters
-    tokens = re.split(delimiterPattern, line.lower())
+    tokens = re.split(delimiterPattern, line.strip().lower())
     for token in tokens:
         # Remove stopwords and non-empty tokens
         if token and token not in stopWords:
