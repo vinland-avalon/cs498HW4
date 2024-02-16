@@ -8,6 +8,7 @@ count = 0
 min_count = sys.maxsize
 max_count = 0
 differences_squared_sum = 0
+nums = []
 
 # Input comes from STDIN
 for line in sys.stdin:
@@ -22,18 +23,15 @@ for line in sys.stdin:
     count += 1
     min_count = min(min_count, current_count)
     max_count = max(max_count, current_count)
+    nums.append(current_count)
 
 # Calculate mean after processing all items
 mean = sum_counts // count
 
-# Reset the input stream to calculate variance
-sys.stdin.seek(0)
 
 # Calculate the sum of squared differences from the mean
-for line in sys.stdin:
-    current_count, _ = line.strip().split('\t', 1)
-    current_count = int(current_count)
-    differences_squared_sum += (current_count - mean) ** 2
+for num in nums:
+    differences_squared_sum += (num - mean) ** 2
 
 # Calculate variance
 variance = differences_squared_sum // count
