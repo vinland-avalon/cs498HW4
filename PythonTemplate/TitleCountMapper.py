@@ -1,31 +1,28 @@
 #!/usr/bin/env python3
 
 import sys
-import string
+import re
 
-
-
+# Paths to stopwords and delimiters files
 stopWordsPath = sys.argv[1]
 delimitersPath = sys.argv[2]
 
+# Read stopwords into a set for faster lookup
+stopWords = set()
+with open(stopWordsPath, 'r') as f:
+    for word in f:
+        stopWords.add(word.strip().lower())
 
-# TODO
-with open(stopWordsPath) as f:
-    # TODO
+# Read delimiters and create a regex pattern
+with open(delimitersPath, 'r') as f:
+    delimiters = f.read().strip()
+    delimiterPattern = '|'.join(map(re.escape, delimiters))
 
-
-
-
-
-
-#TODO 
-with open(delimitersPath) as f:
-    # TODO
-
+# Process each line from standard input
 for line in sys.stdin:
-  
-    # TODO
-
-    # print('%s\t%s' % (  ,  )) pass this output to reducer
-
-
+    # Tokenize the line using the delimiters
+    tokens = re.split(delimiterPattern, line.lower())
+    for token in tokens:
+        # Remove stopwords and non-empty tokens
+        if token and token not in stopWords:
+            print(f'{token}\t1')
