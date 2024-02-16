@@ -23,7 +23,7 @@ word_count_pairs.sort(key=lambda x: x[0])  # Sort lexicographically by word
 word_count_pairs.sort(key=lambda x: x[1])  # Then sort by count
 
 # Select the bottom 10 items as the top words
-top_words = word_count_pairs[-10:]
+top_words = word_count_pairs[-5:]
 
 # Output the top 10 words and their counts
 for word, count in top_words:
